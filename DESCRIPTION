@@ -1,0 +1,28 @@
+Package: defHydWal
+Type: Package
+Title: Déficit hydrique en Wallonia : cartes et graphiques
+Version: 0.1.0
+Author: Thomas Goossens et Loïc Davadan
+Maintainer: <hello.pokyah@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: chron,
+    gstat,
+    tidyr,
+    sp,
+    raster,
+    sf,
+    leaflet,
+    dplyr,
+    ggplot2,
+    RColorBrewer,
+    lubridate,
+    plotly
+DevPackage:
+  pokyah/agrometAPI,
+  pokyah/geoTools,
+  oswaldosantos/ggsn
+RoxygenNote: 6.0.1

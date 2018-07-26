@@ -1,0 +1,97 @@
+---
+title: "situation du deficit hydrique en région wallonne"
+author: "Thomas Goossens <t.goossens@cra.wallonie.be>"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+params:
+  dfrom: !r as.character("2018-04-20")
+  dto: !r as.character("2018-07-03")
+  int: !r FALSE
+  ip_cl: !r 6
+  dh_cl: !r 6
+  ern.pat: "<path_to_ernage.csv>"
+output: html_document
+---
+
+
+```{r global_options, echo = FALSE, message = FALSE}
+library(dplyr)
+library(ggsn)
+devtools::load_all()
+
+## show grouped code output instead of single lines
+knitr::opts_chunk$set(collapse = FALSE)
+knitr::knit_hooks$set(document = function(x){
+  gsub("```\n*```r*\n*", "", x)
+})
+
+knitr::opts_chunk$set(warning = FALSE, echo = FALSE, message = FALSE, fig.width = 8, fig.height = 6, results = "asis")
+```
+
+```{r data-preparation, echo = FALSE, message = FALSE, results='hide'}
+data(plu.obs)
+data(cum.norm)
+if (params$dto > as.Date("2018-06-30")) {
+  plu.obs <- dh_add_days(dto = params$dto,
+    data = plu.obs)
+} 
+cum.obs = dh_obs.cums(plu.obs)
+cum = dh_join_cums(obs = cum.obs, norm = cum.norm)
+```
+
+# Comparaison avec les données historiques : Situation à Ernage
+
+```{r plots_ernage}
+data(ernage.all_y)
+all_y.plot = dhw_plot(ernage.all_y, int = params$int)
+
+data(ernage.two_y)
+two_y.plot = dhw_plot(ernage.two_y, int = params$int)
+
+all_y.plot
+two_y.plot
+```
+
+# Cartographie pour l'ensemble de la Région Wallonne
+```{r summary}
+cum.fil = dhw_filter(data = cum,
+  dfrom = params$dfrom,
+  dto = params$dto)
+
+dhw_summary = dhw_summarize(cum.fil) %>%
+  dplyr::filter(!is.na(poste))
+```
+
+```{r idw, results = 'hide'}
+data(grid.grid)
+dh.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "defExHyd", grid = grid.grid)
+ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid = grid.grid)
+```
+
+## Indice pluviométrique
+```{r carte_indice_pluviometrique}
+data(wallonia.sf)
+ip.map = dhw_map(gridded.data.df = dhw_2_ggmap(ip.spatial),
+  boundaries.sf = wallonia.sf,
+  title.chr = paste0("Carte de l'indice pluviométrique calculé pour la période du ",
+   format(as.Date(params$dfrom, "%Y-%m-%d"), "%d %b %Y"), " au ", format(as.Date(params$dto, "%Y-%m-%d"), "%d %b %Y")),
+  legend.chr = "",
+  target.chr = "var1.pred",
+  nb_classes.num = params$ip_cl,
+  reverse_pal.bool = FALSE
+)
+ip.map
+```
+
+## Déficit hydrique
+```{r carte_déficit_hydrique}
+dh.map = dhw_map(gridded.data.df = dhw_2_ggmap(dh.spatial),
+  boundaries.sf = wallonia.sf,
+  title.chr = paste0("Carte du déficit hydrique calculé pour la période du ",
+     format(as.Date(params$dfrom, "%Y-%m-%d"), "%d %b %Y"), " au ", format(as.Date(params$dto, "%Y-%m-%d"), "%d %b %Y")),
+  legend.chr = "mm",
+  target.chr = "var1.pred",
+  nb_classes.num = params$dh_cl,
+  reverse_pal.bool = FALSE
+)
+dh.map
+```
