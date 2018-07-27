@@ -20,7 +20,8 @@ Imports: chron,
     ggplot2,
     RColorBrewer,
     lubridate,
-    plotly
+    plotly,
+    shiny
 DevPackage:
   pokyah/agrometAPI,
   pokyah/geoTools,
