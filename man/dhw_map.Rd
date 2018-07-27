@@ -5,7 +5,7 @@
 \title{make the static map of the deficit hydrique}
 \usage{
 dhw_map(gridded.data.df, boundaries.sf, title.chr, legend.chr, target.chr,
-  nb_classes.num, reverse_pal.bool)
+  nb_classes.num, reverse_pal.bool, pretty_breaks.bool)
 }
 \arguments{
 \item{gridded.data.df}{dataframe}

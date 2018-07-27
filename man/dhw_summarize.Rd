@@ -4,8 +4,10 @@
 \alias{dhw_summarize}
 \title{summarize data for the selected period}
 \usage{
-dhw_summarize(data)
+dhw_summarize(data, meta)
 }
 \arguments{
 \item{data}{dataframe}
+
+\item{meat}{dataframe}
 }

@@ -7,7 +7,5 @@
 dhw_as.spatial(data)
 }
 \arguments{
-\item{data}{dataframe}
-
 \item{data}{sp dataframe}
 }

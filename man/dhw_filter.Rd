@@ -2,7 +2,7 @@
 % Please edit documentation in R/dhw_filter.R
 \name{dhw_filter}
 \alias{dhw_filter}
-\title{filter the data for the period of interest}
+\title{filter the observed data for the period of interest and relevant stations}
 \usage{
 dhw_filter(data, dfrom, dto)
 }

@@ -3,8 +3,8 @@ title: "situation du deficit hydrique en région wallonne"
 author: "Thomas Goossens <t.goossens@cra.wallonie.be>"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 params:
-  dfrom: !r as.character("2018-04-20")
-  dto: !r as.character("2018-07-03")
+  dfrom: !r as.character("2018-05-01")
+  dto: !r as.character("2018-06-30")
   int: !r FALSE
   ip_cl: !r 6
   dh_cl: !r 6
@@ -15,7 +15,7 @@ output: html_document
 
 ```{r global_options, echo = FALSE, message = FALSE}
 library(dplyr)
-library(ggsn)
+library(ggsn) #from github !!
 devtools::load_all()
 
 ## show grouped code output instead of single lines
@@ -30,12 +30,23 @@ knitr::opts_chunk$set(warning = FALSE, echo = FALSE, message = FALSE, fig.width 
 ```{r data-preparation, echo = FALSE, message = FALSE, results='hide'}
 data(plu.obs)
 data(cum.norm)
+data(st_info)
+# checking if the input date goes beyond 30-06-2018 (in case TRUE, needs API call to get the data not available as .Rda object)
 if (params$dto > as.Date("2018-06-30")) {
-  plu.obs <- dh_add_days(dto = params$dto,
+  plu.obs <- dhw_add_days(dto = params$dto,
     data = plu.obs)
 } 
-cum.obs = dh_obs.cums(plu.obs)
-cum = dh_join_cums(obs = cum.obs, norm = cum.norm)
+# filtering the data to only keep relevant stations and the period of interest
+plu.obs = dhw_filter(data = plu.obs,
+  dfrom = params$dfrom,
+  dto = params$dto)
+
+cum.norm = dhw_filter(data = cum.norm,
+  dfrom = params$dfrom,
+  dto = params$dto)
+
+cum.obs = dhw_obs.cums(plu.obs)
+cum = dhw_join_cums(obs = cum.obs, norm = cum.norm)
 ```
 
 # Comparaison avec les données historiques : Situation à Ernage
@@ -53,12 +64,7 @@ two_y.plot
 
 # Cartographie pour l'ensemble de la Région Wallonne
 ```{r summary}
-cum.fil = dhw_filter(data = cum,
-  dfrom = params$dfrom,
-  dto = params$dto)
-
-dhw_summary = dhw_summarize(cum.fil) %>%
-  dplyr::filter(!is.na(poste))
+dhw_summary = dhw_summarize(cum, st_info)
 ```
 
 ```{r idw, results = 'hide'}
@@ -77,7 +83,8 @@ ip.map = dhw_map(gridded.data.df = dhw_2_ggmap(ip.spatial),
   legend.chr = "",
   target.chr = "var1.pred",
   nb_classes.num = params$ip_cl,
-  reverse_pal.bool = FALSE
+  reverse_pal.bool = FALSE,
+  pretty_breaks.bool = TRUE
 )
 ip.map
 ```
@@ -91,7 +98,8 @@ dh.map = dhw_map(gridded.data.df = dhw_2_ggmap(dh.spatial),
   legend.chr = "mm",
   target.chr = "var1.pred",
   nb_classes.num = params$dh_cl,
-  reverse_pal.bool = FALSE
+  reverse_pal.bool = FALSE,
+  pretty_breaks.bool = TRUE
 )
 dh.map
 ```

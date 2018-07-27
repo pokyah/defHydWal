@@ -38,7 +38,7 @@ devtools::use_data(grid.sp)
 devtools::use_data(grid.grid)
 
 #####
-# PAMESEB normal rainfall data from API
+# PAMESEB normal daily rainfall data from API
 plu.norm <- agrometAPI::get_from_agromet_API(table_name = "get_tmy", sensors = "plu_sum", month_day = "all")
 plu.norm <- agrometAPI::prepare_agromet_API_data.fun(plu.norm, table_name = "get_tmy")
 cum.norm <- plu.norm %>% dplyr::rename(yday = day_of_year) %>%
@@ -49,7 +49,7 @@ devtools::use_data(cum.norm, overwrite = TRUE)
 
 
 #####
-# PAMESEB observed rainfall data from API
+# PAMESEB observed hourly rainfall data from API
 # a single API call for the whole period gives a 504 timeout errorso we split the calls by months
 plu.obs.jan <- agrometAPI::get_from_agromet_API(dfrom = "2018-01-01", dto = "2018-01-31", sensors = "plu")
 plu.obs.jan <- agrometAPI::prepare_agromet_API_data.fun(plu.obs.jan)
@@ -76,10 +76,11 @@ devtools::use_data(plu.obs, overwrite = TRUE)
 #####
 # Pameseb stations metadata
 st_info <- plu.obs %>%
-  filter(mtime == unique(plu.obs$mtime)[1]) %>%
+  group_by(sid) %>%
+  slice(1) %>%
   dplyr::select(one_of(c(
     "sid", "poste",
     "longitude", "latitude",
     "altitude"))
   )
-devtools::use_data(st_info)
+devtools::use_data(st_info, overwrite = TRUE)

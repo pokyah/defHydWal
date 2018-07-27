@@ -1,5 +1,4 @@
 #' @title make the Pameseb deficit hydrique df a sp
-#' @param data dataframe
 #' @param data sp dataframe
 #' @export
 dhw_as.spatial <- function(data){
@@ -47,7 +46,8 @@ dhw_map <- function(gridded.data.df,
   legend.chr,
   target.chr,
   nb_classes.num,
-  reverse_pal.bool
+  reverse_pal.bool,
+  pretty_breaks.bool
   ){
   geoTools::build.static.ggmap(gridded.data.df = gridded.data.df,
     boundaries.sf = boundaries.sf,
@@ -55,7 +55,9 @@ dhw_map <- function(gridded.data.df,
     legend.chr = legend.chr,
     target.chr = target.chr,
     nb_classes.num = nb_classes.num,
-    reverse_pal.bool = reverse_pal.bool
+    reverse_pal.bool = reverse_pal.bool,
+    pretty_breaks.bool = pretty_breaks.bool
+
   )
 }
 
