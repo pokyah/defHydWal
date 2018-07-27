@@ -22,7 +22,6 @@ Imports: chron,
     lubridate,
     plotly,
     shiny
-Remotes:
-  pokyah/agrometAPI,
+Remotes: pokyah/agrometAPI,
   pokyah/geoTools
 RoxygenNote: 6.0.1
