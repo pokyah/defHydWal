@@ -22,7 +22,7 @@ Imports: chron,
     lubridate,
     plotly,
     shiny
-DevPackage:
+Remotes:
   pokyah/agrometAPI,
   pokyah/geoTools,
   oswaldosantos/ggsn
