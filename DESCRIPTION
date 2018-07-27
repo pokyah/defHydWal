@@ -24,6 +24,5 @@ Imports: chron,
     shiny
 Remotes:
   pokyah/agrometAPI,
-  pokyah/geoTools,
-  oswaldosantos/ggsn
+  pokyah/geoTools
 RoxygenNote: 6.0.1
