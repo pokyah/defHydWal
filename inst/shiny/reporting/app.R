@@ -6,12 +6,19 @@ shinyApp(
       max = 11, value = 6),
     sliderInput(inputId = "dh_cl", label = h3("Nombre de classes pour la carte du déficit hydrique"), min = 3,
       max = 11, value = 6),
+    radioButtons(inputId = "extension", label = h3("Format"),
+      choices = list(".html" = "html_document", ".pdf" = "pdf_document", ".doc/odt" = "odt_document"),
+      selected = 1),
     downloadButton("report", "Generate report")
   ),
   server = function(input, output) {
+    filename = "deficit_hydrique_wallonie"
+    extensionInput <- reactive({
+      input$extensions
+    })
     output$report <- downloadHandler(
       # For PDF output, change this to "report.pdf"
-      filename = "deficit_hydrique_wallonie.html",
+      filename = filename,
       content = function(file) {
         # Copy the report file to a temporary directory before processing it, in
         # case we don't have write permissions to the current working dir (which
@@ -36,9 +43,10 @@ shinyApp(
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
         # from the code in this app).
-        rmarkdown::render(tempReport, output_file = file,
+        rmarkdown::render(output_format = extensionInput(), tempReport, output_file = file,
           params = params,
-          envir = new.env(parent = globalenv())
+          envir = new.env(parent = globalenv()
+            )
         )
       }
     )

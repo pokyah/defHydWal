@@ -9,7 +9,6 @@ params:
   ip_cl: NA
   dh_cl: NA
   ern.pat: "<path_to_ernage.csv>"
-output: html_document
 ---
 
 
