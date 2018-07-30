@@ -70,10 +70,9 @@ dhw_summary = dhw_summarize(cum, st_info)
 ```{r idw, results = 'hide'}
 # data(grid.grid)
 data(wallonia.sp)
-dh.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "defExHyd", grid = as(dhw_grid(wallonia.sp, 250),
-  "Spatial"))
-ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid = as(dhw_grid(wallonia.sp, 250),
-  "Spatial"))
+data(grid.250)
+dh.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "defExHyd", grid = grid.250)
+ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid = grid.250)
 browser()
 ```
 
