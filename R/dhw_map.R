@@ -1,11 +1,3 @@
-#' @title make a spatial interpolation grid with desired resolution
-#' @param borders sp dataframe
-#' @param cellsize numeric
-#' @export
-dhw_grid <- function(borders, res){
-  geoTools::quick.grid(borders.sp = borders, cellsize = res)
-}
-
 #' @title make the Pameseb deficit hydrique df a sp
 #' @param data sp dataframe
 #' @export
