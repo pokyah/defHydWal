@@ -27,10 +27,10 @@ grid.500 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 500)
 grid.1000 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 1000)
 grid.5000 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 5000)
 
-devtools::use_data(grid.250)
-devtools::use_data(grid.500)
-devtools::use_data(grid.1000)
-devtools::use_data(grid.5000)
+devtools::use_data(grid.250, overwrite = TRUE)
+devtools::use_data(grid.500, overwrite = TRUE)
+devtools::use_data(grid.1000, overwrite = TRUE)
+devtools::use_data(grid.5000, overwrite = TRUE)
 
 #####
 # PAMESEB normal daily rainfall data from API
