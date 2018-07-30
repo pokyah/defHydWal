@@ -21,7 +21,9 @@ Imports: chron,
     RColorBrewer,
     lubridate,
     plotly,
-    shiny
+    shiny,
+    agrometAPI,
+    geoTools
 Remotes: pokyah/agrometAPI,
   pokyah/geoTools
 RoxygenNote: 6.0.1
