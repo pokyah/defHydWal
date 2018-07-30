@@ -87,13 +87,11 @@ ip.map = dhw_map(gridded.data.df = dhw_2_ggmap(ip.spatial),
   pretty_breaks.bool = TRUE
 )
 ip.map
-
-
 ```
 
 ## Déficit hydrique
 ```{r carte_déficit_hydrique}
-dh.map = dhw_map(gridded.data.df = dhw_2_ggmap(dh.spatial),
+dh.map = geoTools::build.static.ggmap(gridded.data.df = dhw_2_ggmap(dh.spatial),
   boundaries.sf = wallonia.sf,
   title.chr = paste0("Carte du déficit hydrique calculé pour la période du ",
      format(as.Date(params$dfrom, "%Y-%m-%d"), "%d %b %Y"), " au ", format(as.Date(params$dto, "%Y-%m-%d"), "%d %b %Y")),

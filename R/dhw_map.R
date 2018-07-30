@@ -54,6 +54,7 @@ dhw_map <- function(gridded.data.df,
     title.chr = title.chr,
     legend.chr = legend.chr,
     target.chr = target.chr,
+    colorPal = "OrRd",
     nb_classes.num = nb_classes.num,
     reverse_pal.bool = reverse_pal.bool,
     pretty_breaks.bool = pretty_breaks.bool
