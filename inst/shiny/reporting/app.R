@@ -8,7 +8,7 @@ shinyApp(
       max = 11, value = 6),
     downloadButton("report", "Generate report")
   ),
-  server = function(input, output) {
+  server = function(input, output, session) {
     output$report <- downloadHandler(
       # For PDF output, change this to "report.pdf"
       filename = "deficit_hydrique_wallonie.html",
@@ -36,10 +36,13 @@ shinyApp(
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
         # from the code in this app).
-        rmarkdown::render(tempReport, output_file = file,
-          params = params,
-          envir = new.env(parent = globalenv())
-        )
+        withProgress(message = 'Generating Report',
+          detail = 'This may take a while...', value = 0, {
+            rmarkdown::render(tempReport, output_file = file,
+              params = params,
+              envir = new.env(parent = globalenv())
+            )
+          })
       }
     )
   }

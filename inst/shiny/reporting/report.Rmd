@@ -9,7 +9,6 @@ params:
   ip_cl: NA
   dh_cl: NA
   ern.pat: "<path_to_ernage.csv>"
-output: html_document
 ---
 
 
@@ -88,6 +87,8 @@ ip.map = dhw_map(gridded.data.df = dhw_2_ggmap(ip.spatial),
   pretty_breaks.bool = TRUE
 )
 ip.map
+
+
 ```
 
 ## Déficit hydrique
