@@ -32,7 +32,7 @@ data(cum.norm)
 data(st_info)
 # checking if the input date goes beyond 30-06-2018 (in case TRUE, needs API call to get the data not available as .Rda object)
 #browser()
-if (as.Date(params$dto) > as.Date("2018-06-30")) {
+if (as.Date(params$dto) > as.Date("2018-07-30")) {
   plu.obs <- dhw_add_days(dto = as.Date(params$dto),
     data = plu.obs)
 } 
