@@ -76,14 +76,14 @@ ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid
 ## Indice pluviométrique
 ```{r carte_indice_pluviometrique}
 data(wallonia.sf)
-ip.map = dhw_map(gridded.data.df = dhw_2_ggmap(ip.spatial),
+ip.map = geoTools::build.static.ggmap(reverse_pal.bool = FALSE, gridded.data.df = dhw_2_ggmap(ip.spatial),
   boundaries.sf = wallonia.sf,
   title.chr = paste0("Carte de l'indice pluviométrique calculé pour la période du ",
    format(as.Date(params$dfrom, "%Y-%m-%d"), "%d %b %Y"), " au ", format(as.Date(params$dto, "%Y-%m-%d"), "%d %b %Y")),
   legend.chr = "",
   target.chr = "var1.pred",
+  target.name = "ind_plu",
   nb_classes.num = params$ip_cl,
-  reverse_pal.bool = FALSE,
   pretty_breaks.bool = TRUE
 )
 ip.map
@@ -91,14 +91,14 @@ ip.map
 
 ## Déficit hydrique
 ```{r carte_déficit_hydrique}
-dh.map = geoTools::build.static.ggmap(gridded.data.df = dhw_2_ggmap(dh.spatial),
+dh.map = geoTools::build.static.ggmap(reverse_pal.bool = FALSE, gridded.data.df = dhw_2_ggmap(dh.spatial),
   boundaries.sf = wallonia.sf,
   title.chr = paste0("Carte du déficit hydrique calculé pour la période du ",
      format(as.Date(params$dfrom, "%Y-%m-%d"), "%d %b %Y"), " au ", format(as.Date(params$dto, "%Y-%m-%d"), "%d %b %Y")),
   legend.chr = "mm",
   target.chr = "var1.pred",
+  target.name = "defExHyd",
   nb_classes.num = params$dh_cl,
-  reverse_pal.bool = FALSE,
   pretty_breaks.bool = TRUE
 )
 dh.map
