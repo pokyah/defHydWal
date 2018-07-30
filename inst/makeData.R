@@ -22,20 +22,15 @@ devtools::use_data(wallonia.sf)
 devtools::use_data(wallonia.sp)
 
 # WALLONIA interpolation grid - https://stackoverflow.com/questions/43436466/create-grid-in-r-for-kriging-in-gstat/43444232
-grd = sp::makegrid(x = wallonia.sp, cellsize = 250,
-  pretty = TRUE)
-colnames(grd) <- c('x','y')
-grd_pts = sp::SpatialPoints(coords = grd,
-  proj4string = sp::CRS(sp::proj4string(wallonia.sp)))
-grid.sp = grd_pts[wallonia.sp, ]
-grid.df = as.data.frame(grid.sp)
-grid.grid <- grid.sp
-sp::gridded(grid.grid) = TRUE
-grid.sf = sf::st_as_sf(grid.sp)
+grid.250 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 250)
+grid.500 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 500)
+grid.1000 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 1000)
+grid.5000 <- geoTools::quick.grid(borders.sp = wallonia.sp, cellsize = 5000)
 
-devtools::use_data(grid.sf)
-devtools::use_data(grid.sp)
-devtools::use_data(grid.grid)
+devtools::use_data(grid.250)
+devtools::use_data(grid.500)
+devtools::use_data(grid.1000)
+devtools::use_data(grid.5000)
 
 #####
 # PAMESEB normal daily rainfall data from API

@@ -3,6 +3,7 @@ title: "situation du deficit hydrique en région wallonne"
 author: "Thomas Goossens <t.goossens@cra.wallonie.be>"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 params:
+  res: 1000
   dfrom: NA
   dto: NA
   int: NA
@@ -14,7 +15,6 @@ params:
 
 ```{r global_options, echo = FALSE, message = FALSE}
 library(dplyr)
-# library(ggsn) #from github !!
 library(defHydWal)
 
 ## show grouped code output instead of single lines
@@ -68,9 +68,13 @@ dhw_summary = dhw_summarize(cum, st_info)
 ```
 
 ```{r idw, results = 'hide'}
-data(grid.grid)
-dh.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "defExHyd", grid = grid.grid)
-ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid = grid.grid)
+# data(grid.grid)
+data(wallonia.sp)
+dh.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "defExHyd", grid = as(dhw_grid(wallonia.sp, 250),
+  "Spatial"))
+ip.spatial = dhw_idw(data = dhw_as.spatial(dhw_summary), param = "ind_plu", grid = as(dhw_grid(wallonia.sp, 250),
+  "Spatial"))
+browser()
 ```
 
 ## Indice pluviométrique
