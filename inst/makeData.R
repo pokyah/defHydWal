@@ -64,9 +64,9 @@ plu.obs.may <- agrometAPI::prepare_agromet_API_data.fun(plu.obs.may)
 plu.obs.jun <- agrometAPI::get_from_agromet_API(dfrom = "2018-06-01", dto = "2018-06-30", sensors = "plu")
 plu.obs.jun <- agrometAPI::prepare_agromet_API_data.fun(plu.obs.jun)
 plu.obs.jui <- agrometAPI::get_from_agromet_API(dfrom = "2018-07-01", dto = "2018-07-30", sensors = "plu")
-plu.obs.jui <- agrometAPI::prepare_agromet_API_data.fun(plu.obs.jun)
+plu.obs.jui <- agrometAPI::prepare_agromet_API_data.fun(plu.obs.jui)
 
-plu.obs <- bind_rows((list(plu.obs.jan,
+plu.obs <- dplyr::bind_rows((list(plu.obs.jan,
   plu.obs.feb,
   plu.obs.mar,
   plu.obs.apr,
