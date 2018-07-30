@@ -31,35 +31,5 @@ dhw_2_ggmap <- function(data){
   return(data)
 }
 
-#' @title make the static map of the deficit hydrique
-#' @param gridded.data.df dataframe
-#' @param title.chr chr
-#' @param legend.chr chr
-#' @param target.chr chr
-#' @param nb_classes.num num
-#' @param reverse_pal.bool bool
-#' @return dataframe
-#' @export
-dhw_map <- function(gridded.data.df,
-  boundaries.sf,
-  title.chr,
-  legend.chr,
-  target.chr,
-  nb_classes.num,
-  reverse_pal.bool,
-  pretty_breaks.bool
-  ){
-  geoTools::build.static.ggmap(gridded.data.df = gridded.data.df,
-    boundaries.sf = boundaries.sf,
-    title.chr = title.chr,
-    legend.chr = legend.chr,
-    target.chr = target.chr,
-    colorPal = "OrRd",
-    nb_classes.num = nb_classes.num,
-    reverse_pal.bool = reverse_pal.bool,
-    pretty_breaks.bool = pretty_breaks.bool
-
-  )
-}
 
 
