@@ -19,6 +19,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN R -e "install.packages(c('Rcpp', 'devtools', 'shiny', 'rmarkdown'), repos='http://cran.rstudio.com/')"
 
-RUN R -e "devtools::install_github('pokyah/dockerized', ref='shinyApp', force=TRUE)"
+RUN R -e "devtools::install_github('pokyah/defHydWal', ref='dockerized', force=TRUE)"
 
-CMD ["Rscript", "-e", "defHydWal::startApp(4326)"]
+# CMD ["Rscript", "-e", "defHydWal::startApp(4326)"]
