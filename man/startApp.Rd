@@ -4,7 +4,10 @@
 \alias{startApp}
 \title{Run the auto-reporting shiny app}
 \usage{
-startApp()
+startApp(port = 4326)
+}
+\arguments{
+\item{port}{the port on which you want the app to be served}
 }
 \value{
 runs the shinyApp

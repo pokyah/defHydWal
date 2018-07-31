@@ -15,11 +15,10 @@ RUN apt-get update && apt-get install -y \
     libxml2 \
     libxml2-dev \
     gdal-bin \
-    libgdal-dev \
-    gdal \
+    libgdal-dev
 
 RUN R -e "install.packages(c('Rcpp', 'devtools', 'shiny', 'rmarkdown'), repos='http://cran.rstudio.com/')"
 
-RUN R -e "devtools::install_github('pokyah/defHydWal', ref='dockerized', force=TRUE)"
+RUN R -e "devtools::install_github('pokyah/dockerized', ref='shinyApp', force=TRUE)"
 
 CMD ["Rscript", "-e", "defHydWal::startApp(4326)"]
