@@ -1,3 +1,5 @@
+#!/usr/local/bin/R
+
 #' @title Run the auto-reporting shiny app
 #' @return runs the shinyApp
 #' @export

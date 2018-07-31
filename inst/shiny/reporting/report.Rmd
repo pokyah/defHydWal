@@ -8,13 +8,12 @@ params:
   int: NA
   ip_cl: NA
   dh_cl: NA
-  ern.pat: "<path_to_ernage.csv>"
+  ern.df: NA
 ---
 
 
 ```{r global_options, echo = FALSE, message = FALSE}
 library(dplyr)
-# library(ggsn) #from github !!
 library(defHydWal)
 
 ## show grouped code output instead of single lines
@@ -52,10 +51,12 @@ cum = dhw_join_cums(obs = cum.obs, norm = cum.norm)
 # Comparaison avec les données historiques : Situation à Ernage
 
 ```{r plots_ernage}
-data(ernage.all_y)
-all_y.plot = dhw_plot(ernage.all_y, int = params$int)
+# data(ernage.all_y)
 
-data(ernage.two_y)
+ernage.all_y <- subset(params$ern.df, Année %in% c("1959", "1976", "1996", "2017", "2018"))
+ernage.two_y <- subset(params$ern.df, Année %in% c("1976","2018"))
+
+all_y.plot = dhw_plot(ernage.all_y, int = params$int)
 two_y.plot = dhw_plot(ernage.two_y, int = params$int)
 
 all_y.plot
