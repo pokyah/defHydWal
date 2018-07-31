@@ -1,5 +1,3 @@
-#!/usr/local/bin/R
-
 #' @title Run the auto-reporting shiny app
 #' @param port the port on which you want the app to be served
 #' @return runs the shinyApp

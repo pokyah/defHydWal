@@ -11,7 +11,7 @@ Note : You have the option to serve it at the desired port (you can change 4326 
 ## option 2
 
 From terminal with the help of docker:
-`docker run --rm -p 4326:4326 pokyah/defhydwal`
+`sudo docker run --rm --net=host pokyah/defhydwal`
 
 Note : the port is fixed at 4326
 
