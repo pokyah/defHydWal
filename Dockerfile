@@ -21,4 +21,4 @@ RUN R -e "install.packages(c('Rcpp', 'devtools', 'shiny', 'rmarkdown'), repos='h
 
 RUN R -e "devtools::install_github('pokyah/defHydWal', ref='dockerized', force=TRUE)"
 
-# CMD ["Rscript", "-e", "defHydWal::startApp(4326)"]
+# CMD ["Rscript", "-e", "defHydWal::startApp(ip='10.12.110.110.2', port=4326)"]

@@ -8,5 +8,6 @@ startApp <- function(port=4326, ip="127.0.0.1") {
     stop("Could not find example directory. Try re-installing `defHydWal`.", call. = FALSE)
   }
   options(shiny.port = port)
+  options(shiny.host = ip)
   shiny::runApp(appDir, display.mode = "normal")
 }
