@@ -34,6 +34,7 @@ data(st_info)
 if (as.Date(params$dto) > as.Date("2018-07-30")) {
   plu.obs <- dhw_add_days(dto = as.Date(params$dto),
     data = plu.obs)
+  cat(tail(plu.obs))
 } 
 # filtering the data to only keep relevant stations and the period of interest
 plu.obs = dhw_filter(data = plu.obs,

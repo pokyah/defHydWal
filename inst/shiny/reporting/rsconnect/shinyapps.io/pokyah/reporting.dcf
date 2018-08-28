@@ -1,0 +1,10 @@
+name: reporting
+title:
+username:
+account: pokyah
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 407545
+bundleId: 1552108
+url: https://pokyah.shinyapps.io/reporting/
+when: 1535110077.30323
